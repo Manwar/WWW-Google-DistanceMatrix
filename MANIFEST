@@ -1,0 +1,12 @@
+Changes
+lib/WWW/Google/DistanceMatrix.pm
+lib/WWW/Google/DistanceMatrix/Params.pm
+lib/WWW/Google/DistanceMatrix/Result.pm
+Makefile.PL
+MANIFEST
+MANIFEST.SKIP
+SIGNATURE
+README
+t/00-load.t
+t/manifest.t
+t/pod.t
