@@ -5,7 +5,6 @@ lib/WWW/Google/DistanceMatrix/Result.pm
 Makefile.PL
 MANIFEST
 MANIFEST.SKIP
-SIGNATURE
 README
 t/00-load.t
 t/01-new.t

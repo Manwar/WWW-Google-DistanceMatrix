@@ -1,6 +1,16 @@
 package WWW::Google::DistanceMatrix;
 
-$WWW::Google::DistanceMatrix::VERSION = '0.07';
+$WWW::Google::DistanceMatrix::VERSION = '0.08';
+
+=head1 NAME
+
+WWW::Google::DistanceMatrix - Interface to Google Distance Matrix API.
+
+=head1 VERSION
+
+Version 0.08
+
+=cut
 
 use 5.006;
 use JSON;
@@ -16,16 +26,6 @@ use namespace::clean;
 extends 'WWW::Google::UserAgent';
 
 our $BASE_URL = 'https://maps.googleapis.com/maps/api/distancematrix';
-
-=head1 NAME
-
-WWW::Google::DistanceMatrix - Interface to Google Distance Matrix API.
-
-=head1 VERSION
-
-Version 0.07
-
-=cut
 
 has avoid    => (is => 'ro', isa => $Avoid);
 has sensor   => (is => 'ro', isa => $TrueOrFalse, default  => sub { return 'false'   });
@@ -315,7 +315,7 @@ L<http://search.cpan.org/dist/WWW-Google-DistanceMatrix/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2011 - 2014 Mohammad S Anwar.
+Copyright (C) 2011 - 2015 Mohammad S Anwar.
 
 This  program  is  free software; you can redistribute it and/or modify it under
 the  terms  of the the Artistic License (2.0). You may obtain a copy of the full

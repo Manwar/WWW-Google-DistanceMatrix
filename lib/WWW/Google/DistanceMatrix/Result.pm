@@ -1,12 +1,6 @@
 package WWW::Google::DistanceMatrix::Result;
 
-$WWW::Google::DistanceMatrix::Result::VERSION = '0.07';
-
-use 5.006;
-use overload q{""} => 'as_string', fallback => 1;
-
-use Moo;
-use namespace::clean;
+$WWW::Google::DistanceMatrix::Result::VERSION = '0.08';
 
 =head1 NAME
 
@@ -14,9 +8,15 @@ WWW::Google::DistanceMatrix::Result - Placeholder for the result of L<WWW::Googl
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 =cut
+
+use 5.006;
+use overload q{""} => 'as_string', fallback => 1;
+
+use Moo;
+use namespace::clean;
 
 has origin      => (is => 'ro', required => 1);
 has destination => (is => 'ro', required => 1);
@@ -75,7 +75,7 @@ L<http://search.cpan.org/dist/WWW-Google-DistanceMatrix/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2011 - 2014 Mohammad S Anwar.
+Copyright (C) 2011 - 2015 Mohammad S Anwar.
 
 This  program  is  free software; you can redistribute it and/or modify it under
 the  terms  of the the Artistic License (2.0). You may obtain a copy of the full
