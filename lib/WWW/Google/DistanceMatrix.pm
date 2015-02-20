@@ -181,7 +181,7 @@ sub getDistance {
     my $url      = $self->_url($params);
     my $response = $self->get($url);
     my $contents = from_json($response->{content});
-
+    return $contents->{error_message} if defined $contents->{error_message};
     return _result($contents);
 }
 
