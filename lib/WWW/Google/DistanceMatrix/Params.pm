@@ -68,8 +68,8 @@ our $Mode = sub {
 sub check_mode { return exists $MODE->{lc($_[0])}; }
 
 sub check_latlng {
-    my ($str) = @_;
-
+    my ($str_arrayref) = @_;
+    my $str = $arrayref->[0];
     my ($lat, $lng);
     die "ERROR: Invalid data type 'latlng' found [$str]"
         unless (defined($str)
