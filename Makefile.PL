@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 use 5.006;
 use strict;
 use warnings FATAL => 'all';
@@ -21,7 +23,7 @@ WriteMakefile(
         'Moo'                    => 0,
         'JSON'                   => 0,
         'namespace::clean'       => 0,
-        'WWW::Google::UserAgent' => '0.07'
+        'WWW::Google::UserAgent' => '0.14'
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'WWW-Google-DistanceMatrix-*' },

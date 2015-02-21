@@ -1,5 +1,10 @@
 Revision history for WWW-Google-DistanceMatrix
 
+0.09    Sat Feb 21 22:50:00 2015
+        - Handled error message appropriately as reported by renan carvalho.
+        - Validated latlng correctly as suggested by renan carvalho.
+        - Upgraded to use WWW::Google::UserAgent v0.14.
+
 0.08    Sat Jan 17 10:20:00 2015
         - Removed SIGNATURE file.
         - Updated MANIFEST.SKIP file to ignore folder 'eumm/'.

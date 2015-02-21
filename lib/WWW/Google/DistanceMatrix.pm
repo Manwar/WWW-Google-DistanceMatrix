@@ -1,6 +1,6 @@
 package WWW::Google::DistanceMatrix;
 
-$WWW::Google::DistanceMatrix::VERSION = '0.08';
+$WWW::Google::DistanceMatrix::VERSION = '0.09';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ WWW::Google::DistanceMatrix - Interface to Google Distance Matrix API.
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
@@ -26,6 +26,13 @@ use namespace::clean;
 extends 'WWW::Google::UserAgent';
 
 our $BASE_URL = 'https://maps.googleapis.com/maps/api/distancematrix';
+our $REASON   = {
+    'INVALID_REQUEST'       => 'Indicates that the provided request was invalid.',
+    'MAX_ELEMENTS_EXCEEDED' => 'Indicates that the product of origins and destinations exceeds the per-query limit.',
+    'OVER_QUERY_LIMIT'      => 'Indicates the service has received too many requests from your application within the allowed time period.',
+    'REQUEST_DENIED'        => 'Indicates that the service denied use of the Distance Matrix service by your application.',
+    'UNKNOWN_ERROR'         => 'Indicates a Distance Matrix request could not be processed due to a server error. The request may succeed if you try again.'
+};
 
 has avoid    => (is => 'ro', isa => $Avoid);
 has sensor   => (is => 'ro', isa => $TrueOrFalse, default  => sub { return 'false'   });
@@ -180,14 +187,33 @@ sub getDistance {
 
     my $url      = $self->_url($params);
     my $response = $self->get($url);
-    my $contents = from_json($response->{content});
+    my $content  = from_json($response->{content});
 
-    return _result($contents);
+    _check_content($content);
+    return _result($content);
 }
 
 #
-# PRIVATE METHODS
 #
+# PRIVATE METHODS
+
+sub _check_content {
+    my ($content) = @_;
+
+    if (defined $content && defined $content->{error_message}) {
+        my @caller = caller(1);
+        @caller = caller(2) if $caller[3] eq '(eval)';
+        my $status = $content->{status};
+
+        WWW::Google::UserAgent::Exception->throw({
+            method      => $caller[3],
+            message     => $content->{error_message},
+            code        => $status,
+            reason      => $REASON->{$status},
+            filename    => $caller[1],
+            line_number => $caller[2] });
+    }
+}
 
 sub _url {
     my ($self, $params) = @_;

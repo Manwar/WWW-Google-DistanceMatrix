@@ -1,6 +1,6 @@
 package WWW::Google::DistanceMatrix::Params;
 
-$WWW::Google::DistanceMatrix::Params::VERSION = '0.08';
+$WWW::Google::DistanceMatrix::Params::VERSION = '0.09';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ WWW::Google::DistanceMatrix::Params - Placeholder for parameters for WWW::Google
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
@@ -68,8 +68,9 @@ our $Mode = sub {
 sub check_mode { return exists $MODE->{lc($_[0])}; }
 
 sub check_latlng {
-    my ($str) = @_;
+    my ($latlng) = @_;
 
+    my $str = $latlng->[0];
     my ($lat, $lng);
     die "ERROR: Invalid data type 'latlng' found [$str]"
         unless (defined($str)

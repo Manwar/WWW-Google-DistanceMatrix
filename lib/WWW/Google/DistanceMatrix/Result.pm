@@ -1,6 +1,6 @@
 package WWW::Google::DistanceMatrix::Result;
 
-$WWW::Google::DistanceMatrix::Result::VERSION = '0.08';
+$WWW::Google::DistanceMatrix::Result::VERSION = '0.09';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ WWW::Google::DistanceMatrix::Result - Placeholder for the result of L<WWW::Googl
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
