@@ -1,6 +1,7 @@
 package WWW::Google::DistanceMatrix;
 
-$WWW::Google::DistanceMatrix::VERSION = '0.09';
+$WWW::Google::DistanceMatrix::VERSION   = '0.10';
+$WWW::Google::DistanceMatrix::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
 
@@ -8,7 +9,7 @@ WWW::Google::DistanceMatrix - Interface to Google Distance Matrix API.
 
 =head1 VERSION
 
-Version 0.09
+Version 0.10
 
 =cut
 
@@ -71,21 +72,26 @@ Google map is prohibited.
 
 The following list of optional parameters can be passed in to the constructor.
 
-    +--------------+----------+--------------------------------------------------------------+
-    | key          | Required |                                                              |
-    +--------------+----------+--------------------------------------------------------------+
-    | mode         | No       | Specifies what mode of transport to use when calculating     |
-    |              |          | directions. Valid values are 'driving', 'walking' and        |
-    |              |          | 'bicycling'. Default value is 'driving'.                     |
-    | language     | No       | The language in which to return results. Default is 'en'.    |
-    | avoid        | No       | Introduces restrictions to the route. Valid values: 'tolls'  |
-    |              |          | and 'highways'. Only one restriction can be specified.       |
-    | units        | No       | Specifies the unit system to use when expressing distance as |
-    |              |          | text. Valid values: 'metric' (default) and 'imperial'.       |
-    | sensor       | No       | Indicates whether your application is using a sensor (such as|
-    |              |          | a GPS locator) to determine the user's location. This value  |
-    |              |          | must be either 'true' or 'false'. Default is 'false'.        |
-    +--------------+----------+--------------------------------------------------------------+
+    +----------+----------+-----------------------------------------------------+
+    | key      | Required |                                                     |
+    +----------+----------+-----------------------------------------------------+
+    | mode     | No       | Specifies what mode of transport to use when        |
+    |          |          | calculating directions. Valid values are 'driving', |
+    |          |          | 'walking' and 'bicycling'. Default value is         |
+    |          |          | 'driving'.                                          |
+    | language | No       | The language in which to return results. Default is |
+    |          |          | 'en'.                                               |
+    | avoid    | No       | Introduces restrictions to the route. Valid values: |
+    |          |          | 'tolls' and 'highways'. Only one restriction can be |
+    |          |          | specified.                                          |
+    | units    | No       | Specifies the unit system to use when expressing    |
+    |          |          | distance as text. Valid values: 'metric' (default)  |
+    |          |          | and 'imperial'.                                     |
+    | sensor   | No       | Indicates whether your application is using a sensor|
+    |          |          | (such as a GPS locator) to determine the user's     |
+    |          |          | location. This value must be either 'true' or       |
+    |          |          | 'false'. Default is 'false'.                        |
+    +----------+----------+-----------------------------------------------------+
 
 =head1 SUPPORTED LANGUAGES
 
@@ -154,21 +160,24 @@ The following list of optional parameters can be passed in to the constructor.
 
 =head1 METHODS
 
-=head2 getDistance()
+=head2 getDistance(\%param)
 
-Returns the distance matrix in the desired output format (json/xml) from the set of origins to
-the set of destinations. Following parameters can be passed in:
+It expects parameter as ref to a hash containing keys from the table below and it
+then returns the distance matrix as ref to a list of objects of type L<WWW::Google::DistanceMatrix::Result>
+from the set of origins to the set of destinations. On error  it throws exception
+of type L<WWW::Google::UserAgent::Exception>.
 
-    +----------+-----------------------------------------------------------+
-    | key      | Description                                               |
-    +----------+-----------------------------------------------------------+
-    | o_addr   | One or more origin address(es).                           |
-    | o_latlng | One or more origin latitude/longitude coordinate(s).      |
-    | d_addr   | One or more destination address(es).                      |
-    | d_latlng | One or more destination latitude/longitude coordinate(s). |
-    +----------+-----------------------------------------------------------+
+    +----------+----------------------------------------------------------------+
+    | key      | Description                                                    |
+    +----------+----------------------------------------------------------------+
+    | o_addr   | One or more origin address(es).                                |
+    | o_latlng | One or more origin latitude/longitude coordinate(s).           |
+    | d_addr   | One or more destination address(es).                           |
+    | d_latlng | One or more destination latitude/longitude coordinate(s).      |
+    +----------+----------------------------------------------------------------+
 
-If you pass coordinates ensure that no space exists between the latitude/longitude values.
+If  you  pass  coordinates  ensure  that no space exists between  the latitude an
+longitude values.
 
    use strict; use warnings;
    use WWW::Google::DistanceMatrix;
@@ -218,6 +227,9 @@ sub _check_content {
 sub _url {
     my ($self, $params) = @_;
 
+    my @caller = caller(1);
+    @caller = caller(2) if $caller[3] eq '(eval)';
+
     my ($origins, $destinations) = ([], []);
     if (defined $params && ref($params) eq 'HASH') {
         if (defined $params->{'o_addr'} && (ref($params->{'o_addr'}) eq 'ARRAY')) {
@@ -228,7 +240,14 @@ sub _url {
             $FIELDS->{'o_latlng'}->{check}->($params->{'o_latlng'});
             push @$origins, @{$params->{'o_latlng'}};
         }
-        die "ERROR: Missing mandatory param: origins" unless scalar(@$origins);;
+
+        WWW::Google::UserAgent::Exception->throw({
+            method      => $caller[3],
+            message     => "Missing mandatory param: origins",
+            code        => 'MISSING_REQUIRED_PARAM',
+            reason      => 'MISSING_REQUIRED_PARAM',
+            filename    => $caller[1],
+            line_number => $caller[2] }) unless scalar(@$origins);
 
         if (defined $params->{'d_addr'} && (ref($params->{'d_addr'}) eq 'ARRAY')) {
             $FIELDS->{'d_addr'}->{check}->($params->{'d_addr'});
@@ -238,10 +257,23 @@ sub _url {
             $FIELDS->{'d_latlng'}->{check}->($params->{'d_latlng'});
             push @$destinations, @{$params->{'d_latlng'}};
         }
-        die "ERROR: Missing mandatory param: destinations" unless scalar(@$destinations);;
+
+        WWW::Google::UserAgent::Exception->throw({
+            method      => $caller[3],
+            message     => "Missing mandatory param: destinations",
+            code        => 'MISSING_REQUIRED_PARAM',
+            reason      => 'MISSING_REQUIRED_PARAM',
+            filename    => $caller[1],
+            line_number => $caller[2] }) unless scalar(@$destinations);
     }
     else {
-        die "ERROR: Missing mandatory params: origins/destinations";
+        WWW::Google::UserAgent::Exception->throw({
+            method      => $caller[3],
+            message     => "Missing mandatory param: origins/destinations",
+            code        => 'MISSING_REQUIRED_PARAM',
+            reason      => 'MISSING_REQUIRED_PARAM',
+            filename    => $caller[1],
+            line_number => $caller[2] });
     }
 
     validate({ origins => 1, destinations => 1 },

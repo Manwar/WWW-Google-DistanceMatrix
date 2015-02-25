@@ -23,7 +23,7 @@ WriteMakefile(
         'Moo'                    => 0,
         'JSON'                   => 0,
         'namespace::clean'       => 0,
-        'WWW::Google::UserAgent' => '0.14'
+        'WWW::Google::UserAgent' => '0.16'
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'WWW-Google-DistanceMatrix-*' },
