@@ -1,5 +1,8 @@
 Revision history for WWW-Google-DistanceMatrix
 
+0.11    Fri Aug 07 12:00:00 2015
+        - Upgraded to use WWW::Google::UserAgent v0.17.
+
 0.10    Wed Feb 25 11:15:00 2015
         - Upgraded to use WWW::Google::UserAgent v0.16.
         - Updated method getDistance() description in the pod document.

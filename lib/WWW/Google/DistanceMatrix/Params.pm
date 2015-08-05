@@ -1,6 +1,7 @@
 package WWW::Google::DistanceMatrix::Params;
 
-$WWW::Google::DistanceMatrix::Params::VERSION = '0.10';
+$WWW::Google::DistanceMatrix::Params::VERSION   = '0.11';
+$WWW::Google::DistanceMatrix::Params::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
 
@@ -8,7 +9,7 @@ WWW::Google::DistanceMatrix::Params - Placeholder for parameters for WWW::Google
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =cut
 
@@ -20,7 +21,7 @@ use vars qw(@ISA @EXPORT @EXPORT_OK);
 
 require Exporter;
 @ISA = qw(Exporter);
-@EXPORT_OK = qw(validate $FIELDS $Avoid $Units $Mode $Language);
+@EXPORT_OK = qw(validate $FIELDS);
 
 my $LANGUAGES = {
     'ar' => 1, 'eu' => 1, 'bg'    => 1, 'bn'    => 1, 'ca'    => 1, 'cs'    => 1, 'da'    => 1, 'de' => 1,
@@ -43,27 +44,9 @@ our $Language = sub {
 
 sub check_language { return exists $LANGUAGES->{lc($_[0])}; }
 
-our $Avoid = sub {
-    my ($str) = @_;
-
-    die "ERROR: Invalid data type 'avoid' found [$str]" unless check_avoid($str);
-};
-
 sub check_avoid { return exists $AVOID->{lc($_[0])}; }
 
-our $Units = sub {
-    my ($str) = @_;
-
-    die "ERROR: Invalid data type 'units' found [$str]" unless check_units($str);
-};
-
 sub check_units { return exists $UNITS->{lc($_[0])}; }
-
-our $Mode = sub {
-    my ($str) = @_;
-
-    die "ERROR: Invalid data type 'mode' found [$str]" unless check_mode($str);
-};
 
 sub check_mode { return exists $MODE->{lc($_[0])}; }
 
@@ -90,17 +73,17 @@ sub check_str {
 };
 
 our $FIELDS = {
-    'o_addr'       => { check => sub { check_str(@_)     }, type => 's' },
-    'o_latlng'     => { check => sub { check_latlng(@_)  }, type => 's' },
-    'd_addr'       => { check => sub { check_str(@_)     }, type => 's' },
-    'd_latlng'     => { check => sub { check_latlng(@_)  }, type => 's' },
-    'origins'      => { check => sub { check_str(@_)     }, type => 's' },
-    'destinations' => { check => sub { check_str(@_)     }, type => 's' },
-    'sensor'       => { check => sub { check_str(@_)     }, type => 's' },
-    'avoid'        => { check => sub { check_str(@_)     }, type => 's' },
-    'units'        => { check => sub { check_units(@_)   }, type => 's' },
-    'mode'         => { check => sub { check_str(@_)     }, type => 's' },
-    'language'     => { check => sub { check_str(@_)     }, type => 's' },
+    'o_addr'       => { check => sub { check_str(@_)      }, type => 's' },
+    'o_latlng'     => { check => sub { check_latlng(@_)   }, type => 's' },
+    'd_addr'       => { check => sub { check_str(@_)      }, type => 's' },
+    'd_latlng'     => { check => sub { check_latlng(@_)   }, type => 's' },
+    'origins'      => { check => sub { check_str(@_)      }, type => 's' },
+    'destinations' => { check => sub { check_str(@_)      }, type => 's' },
+    'sensor'       => { check => sub { check_str(@_)      }, type => 's' },
+    'avoid'        => { check => sub { check_str(@_)      }, type => 's' },
+    'units'        => { check => sub { check_units(@_)    }, type => 's' },
+    'mode'         => { check => sub { check_str(@_)      }, type => 's' },
+    'language'     => { check => sub { check_language(@_) }, type => 's' },
 };
 
 sub validate {

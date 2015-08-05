@@ -1,6 +1,6 @@
 package WWW::Google::DistanceMatrix;
 
-$WWW::Google::DistanceMatrix::VERSION   = '0.10';
+$WWW::Google::DistanceMatrix::VERSION   = '0.11';
 $WWW::Google::DistanceMatrix::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ WWW::Google::DistanceMatrix - Interface to Google Distance Matrix API.
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =cut
 
@@ -19,8 +19,8 @@ use Data::Dumper;
 
 use WWW::Google::UserAgent;
 use WWW::Google::DistanceMatrix::Result;
-use WWW::Google::UserAgent::DataTypes qw($TrueOrFalse $XmlOrJson);
-use WWW::Google::DistanceMatrix::Params qw(validate $Avoid $Units $Mode $Language $FIELDS);
+use WWW::Google::UserAgent::DataTypes -all;
+use WWW::Google::DistanceMatrix::Params qw(validate $FIELDS);
 
 use Moo;
 use namespace::clean;
@@ -35,12 +35,12 @@ our $REASON   = {
     'UNKNOWN_ERROR'         => 'Indicates a Distance Matrix request could not be processed due to a server error. The request may succeed if you try again.'
 };
 
-has avoid    => (is => 'ro', isa => $Avoid);
-has sensor   => (is => 'ro', isa => $TrueOrFalse, default  => sub { return 'false'   });
-has units    => (is => 'ro', isa => $Units,       default  => sub { return 'metric'  });
-has mode     => (is => 'ro', isa => $Mode,        default  => sub { return 'driving' });
-has language => (is => 'ro', isa => $Language,    default  => sub { return 'en'      });
-has output   => (is => 'ro', isa => $XmlOrJson,   default  => sub { return 'json'    });
+has avoid    => (is => 'ro', isa => Avoid);
+has sensor   => (is => 'ro', isa => TrueFalse, default => sub { 'false'   });
+has units    => (is => 'ro', isa => Unit,      default => sub { 'metric'  });
+has mode     => (is => 'ro', isa => Mode,      default => sub { 'driving' });
+has language => (is => 'ro', isa => Language,  default => sub { 'en'      });
+has output   => (is => 'ro', isa => FileType,  default => sub { 'json'    });
 
 =head1 DESCRIPTION
 

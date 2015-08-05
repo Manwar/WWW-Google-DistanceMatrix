@@ -16,14 +16,14 @@ WriteMakefile(
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
     },
-    BUILD_REQUIRES => {
+    BUILD_REQUIRES   => {
         'Test::More' => 0,
     },
     PREREQ_PM => {
-        'Moo'                    => 0,
-        'JSON'                   => 0,
-        'namespace::clean'       => 0,
-        'WWW::Google::UserAgent' => '0.16'
+        'Moo'                    => '2.000000',
+        'namespace::clean'       => '0.24',
+        'JSON'                   => '2.53',
+        'WWW::Google::UserAgent' => '0.17'
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'WWW-Google-DistanceMatrix-*' },
