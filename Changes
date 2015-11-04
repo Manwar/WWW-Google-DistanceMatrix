@@ -1,5 +1,8 @@
 Revision history for WWW-Google-DistanceMatrix
 
+0.14    Wed Nov 04 12:55:00 2015
+        - Upgraded to use WWW::Google::UserAgent v0.20.
+
 0.13    Wed Sep 09 10:50:00 2015
         - Added link to the official Google API document.
 

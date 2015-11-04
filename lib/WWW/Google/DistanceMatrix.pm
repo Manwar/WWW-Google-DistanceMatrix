@@ -1,6 +1,6 @@
 package WWW::Google::DistanceMatrix;
 
-$WWW::Google::DistanceMatrix::VERSION   = '0.13';
+$WWW::Google::DistanceMatrix::VERSION   = '0.14';
 $WWW::Google::DistanceMatrix::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ WWW::Google::DistanceMatrix - Interface to Google Distance Matrix API.
 
 =head1 VERSION
 
-Version 0.13
+Version 0.14
 
 =cut
 
