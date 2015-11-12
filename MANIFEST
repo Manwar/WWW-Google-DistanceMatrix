@@ -1,4 +1,5 @@
 Changes
+LICENSE
 lib/WWW/Google/DistanceMatrix.pm
 lib/WWW/Google/DistanceMatrix/Params.pm
 lib/WWW/Google/DistanceMatrix/Result.pm

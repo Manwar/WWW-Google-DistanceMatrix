@@ -1,6 +1,6 @@
 package WWW::Google::DistanceMatrix;
 
-$WWW::Google::DistanceMatrix::VERSION   = '0.14';
+$WWW::Google::DistanceMatrix::VERSION   = '0.15';
 $WWW::Google::DistanceMatrix::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ WWW::Google::DistanceMatrix - Interface to Google Distance Matrix API.
 
 =head1 VERSION
 
-Version 0.14
+Version 0.15
 
 =cut
 
@@ -58,9 +58,9 @@ Distance Matrix API has the following limits in place:
 
 =item * 2500 elements per 24 hour period.
 
-The official Google API document can be found L<here|https://developers.google.com/maps/documentation/distancematrix/intro>.
-
 =back
+
+The official Google API document can be found L<here|https://developers.google.com/maps/documentation/distancematrix/intro>.
 
 =head1 NOTE
 

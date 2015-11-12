@@ -1,5 +1,9 @@
 Revision history for WWW-Google-DistanceMatrix
 
+0.15    Thu Nov 12 10:45:00 2015
+        - Added LICENSE file.
+        - Minor pod changes to the package WWW::Google::DistanceMatrix.
+
 0.14    Wed Nov 04 12:55:00 2015
         - Upgraded to use WWW::Google::UserAgent v0.20.
 
