@@ -29,6 +29,11 @@ WriteMakefile(
     clean => { FILES => 'WWW-Google-DistanceMatrix-*' },
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
+        provides    => {
+            'WWW::Google::DistanceMatrix'          => { file => 'lib/WWW/Google/DistanceMatrix.pm',        version => '0.17' },
+            'WWW::Google::DistanceMatrix::Params'  => { file => 'lib/WWW/Google/DistanceMatrix/Params.pm', version => '0.17' },
+            'WWW::Google::DistanceMatrix::Result'  => { file => 'lib/WWW/Google/DistanceMatrix/Result.pm', version => '0.17' },
+        },
         resources => {
             repository => {
                 type => 'git',
