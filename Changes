@@ -1,5 +1,8 @@
 Revision history for WWW::Google::DistanceMatrix
 
+0.18  Fri Jan 19 12:20:00 2018
+      - Added test scripts (t/meta-json.t and t/meta-yml.t).
+
 0.17  Thu Jan 18 18:05:00 2018
       - Added key 'provides' to the Makefile.PL script.
 
