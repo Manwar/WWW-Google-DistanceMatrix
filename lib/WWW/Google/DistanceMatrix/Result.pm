@@ -1,6 +1,6 @@
 package WWW::Google::DistanceMatrix::Result;
 
-$WWW::Google::DistanceMatrix::Result::VERSION   = '0.18';
+$WWW::Google::DistanceMatrix::Result::VERSION   = '0.19';
 $WWW::Google::DistanceMatrix::Result::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ WWW::Google::DistanceMatrix::Result - Placeholder for the result of L<WWW::Googl
 
 =head1 VERSION
 
-Version 0.18
+Version 0.19
 
 =cut
 
@@ -17,7 +17,7 @@ use 5.006;
 use overload q{""} => 'as_string', fallback => 1;
 
 use Moo;
-use namespace::clean;
+use namespace::autoclean;
 
 has origin      => (is => 'ro', required => 1);
 has destination => (is => 'ro', required => 1);

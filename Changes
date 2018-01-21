@@ -1,5 +1,8 @@
 Revision history for WWW::Google::DistanceMatrix
 
+0.19  Sun Jan 21 07:00:00 2018
+      - Using namespace::autoclean instead.
+
 0.18  Fri Jan 19 12:20:00 2018
       - Added test scripts (t/meta-json.t and t/meta-yml.t).
 

@@ -20,7 +20,7 @@ WriteMakefile(
     },
     PREREQ_PM => {
         'Moo'                    => '2.000000',
-        'namespace::clean'       => '0.24',
+        'namespace::autoclean'   => '0.28',
         'JSON'                   => '2.53',
         'WWW::Google::UserAgent' => '0.20'
     },
@@ -29,9 +29,9 @@ WriteMakefile(
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
         provides    => {
-            'WWW::Google::DistanceMatrix'          => { file => 'lib/WWW/Google/DistanceMatrix.pm',        version => '0.18' },
-            'WWW::Google::DistanceMatrix::Params'  => { file => 'lib/WWW/Google/DistanceMatrix/Params.pm', version => '0.18' },
-            'WWW::Google::DistanceMatrix::Result'  => { file => 'lib/WWW/Google/DistanceMatrix/Result.pm', version => '0.18' },
+            'WWW::Google::DistanceMatrix'          => { file => 'lib/WWW/Google/DistanceMatrix.pm',        version => '0.19' },
+            'WWW::Google::DistanceMatrix::Params'  => { file => 'lib/WWW/Google/DistanceMatrix/Params.pm', version => '0.19' },
+            'WWW::Google::DistanceMatrix::Result'  => { file => 'lib/WWW/Google/DistanceMatrix/Result.pm', version => '0.19' },
         },
         resources => {
             repository => {
